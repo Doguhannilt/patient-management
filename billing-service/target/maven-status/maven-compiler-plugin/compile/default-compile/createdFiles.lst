@@ -14,6 +14,7 @@ billing\BillingServiceGrpc$BillingServiceStub.class
 billing\BillingServiceGrpc$BillingServiceFutureStub.class
 billing\BillingServiceGrpc$2.class
 billing\BillingServiceGrpc$MethodHandlers.class
+com\project\billing_service\grpc\BillingGrpcService.class
 billing\BillingRequest$1.class
 billing\BillingResponse.class
 billing\BillingServiceGrpc$BillingServiceFileDescriptorSupplier.class
