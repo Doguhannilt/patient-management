@@ -25,6 +25,8 @@ services:
       - "8080:8080"
     environment:
       SPRING_PROFILES_ACTIVE: prod
+      BILLING_SERVICE_ADDRESS: billing-service
+      BILLING_SERVICE_GRPC_PORT: 9001
     networks:
       - patient-net
 
