@@ -2,6 +2,7 @@ package com.project.patient_service.controller;
 
 import com.project.patient_service.dto.PatientRequestDTO;
 import com.project.patient_service.dto.PatientResponseDTO;
+import com.project.patient_service.model.Patient;
 import com.project.patient_service.service.PatientService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -12,6 +13,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -54,5 +56,21 @@ public class PatientController {
     public ResponseEntity<Void> deletePatient(@PathVariable UUID id) {
         patientService.deletePatient(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/find/{id}")
+    @Operation(summary = "Find A Patient By Id")
+    public ResponseEntity<Patient> findPatientById(@PathVariable UUID id) {
+        Optional<Patient> currentId = patientService.findPatientById(id);
+        if (currentId.isPresent()) {return ResponseEntity.ok(currentId.get());}
+        else {return ResponseEntity.notFound().build();}
+    }
+
+    @GetMapping("/find/email/{email]")
+    @Operation(summary = "Find A Patient By Email")
+    public ResponseEntity<Boolean> findPatientByEmail(@PathVariable String email) {
+        boolean patientByEmail = patientService.findPatientByEmail(email);
+        if(patientByEmail) {return ResponseEntity.ok().body(true);}
+        else {return ResponseEntity.notFound().build();}
     }
 }

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -70,4 +71,14 @@ public class PatientService {
     public void deletePatient(UUID id) {
         patientRepository.deleteById(id);
     }
+
+    public Optional<Patient> findPatientById(UUID id) {
+        return patientRepository.findById(id);
+    }
+
+    public boolean findPatientByEmail(String email) {
+        return patientRepository.existsByEmail(email);
+    }
+
+
 }
