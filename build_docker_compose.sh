@@ -28,6 +28,12 @@ pushd ./analytics-service
 docker-compose up --build -d
 popd
 
+# Doctor Service
+echo "Building and starting Doctor Service..."
+pushd ./doctor-service
+docker-compose up --build -d
+popd
+
 # Main Application
 echo "Building and starting Main Application..."
 pushd ./patient-management
