@@ -66,7 +66,7 @@ public class PatientController {
         else {return ResponseEntity.notFound().build();}
     }
 
-    @GetMapping("/find/email/{email]")
+    @GetMapping("/find/email/{email}")
     @Operation(summary = "Find A Patient By Email")
     public ResponseEntity<Boolean> findPatientByEmail(@PathVariable String email) {
         boolean patientByEmail = patientService.findPatientByEmail(email);
