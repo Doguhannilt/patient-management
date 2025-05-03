@@ -20,7 +20,12 @@ spring:
             - Path=/api-docs/patients
           filters:
             - RewritePath=/api-docs/patients,/v3/api-docs
-
+        - id: doctor-service-route
+          uri: http://doctor-service:8083
+          predicates:
+            - Path=/api/doctors/**
+          filters:
+            - StripPrefix=1
 
 logging:
   level:
