@@ -17,9 +17,9 @@ public class Appointment {
     private UUID id;
 
     @NotNull
-    private String patientId;
+    private UUID patientId;
     @NotNull
-    private String doctorId;
+    private UUID doctorId;
     @NotNull
     private String serviceDate;
     @NotNull
@@ -31,24 +31,31 @@ public class Appointment {
     @NotNull
     private PaymentType paymentType;
 
+    public @NotNull UUID getPatientId() {
+        return patientId;
+    }
+
+    public void setPatientId(@NotNull UUID patientId) {
+        this.patientId = patientId;
+    }
+
+    public @NotNull UUID getDoctorId() {
+        return doctorId;
+    }
+
+    public void setDoctorId(@NotNull UUID doctorId) {
+        this.doctorId = doctorId;
+    }
+
     public UUID getId() {
         return id;
     }
+
     public void setId(UUID id) {
         this.id = id;
     }
-    public String getPatientId() {
-        return patientId;
-    }
-    public void setPatientId(String patientId) {
-        this.patientId = patientId;
-    }
-    public String getDoctorId() {
-        return doctorId;
-    }
-    public void setDoctorId(String doctorId) {
-        this.doctorId = doctorId;
-    }
+
+
     public String getServiceDate() {
         return serviceDate;
     }
