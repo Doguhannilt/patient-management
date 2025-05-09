@@ -62,8 +62,11 @@ public class PatientController {
     @Operation(summary = "Find A Patient By Id")
     public ResponseEntity<Patient> findPatientById(@PathVariable UUID id) {
         Optional<Patient> currentId = patientService.findPatientById(id);
-        if (currentId.isPresent()) {return ResponseEntity.ok(currentId.get());}
-        else {return ResponseEntity.notFound().build();}
+        if (currentId.isPresent()) {
+            return ResponseEntity.ok(currentId.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @GetMapping("/find/email/{email}")

@@ -58,11 +58,13 @@ public class DoctorController {
     }
 
     @GetMapping("/find/{id}")
-    @Operation(summary = "Find A Doctor By Id")
     public ResponseEntity<Doctor> findPatientById(@PathVariable UUID id) {
         Optional<Doctor> currentId = doctorService.findDoctorById(id);
-        if (currentId.isPresent()) {return ResponseEntity.ok(currentId.get());}
-        else {return ResponseEntity.notFound().build();}
+        if (currentId.isPresent()) {
+            return ResponseEntity.ok(currentId.get()); // 200 OK + body
+        } else {
+            return ResponseEntity.notFound().build(); // 404 Not Found
+        }
     }
 
 }
