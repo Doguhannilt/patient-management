@@ -6,26 +6,14 @@ import com.project.model.PaymentType;
 import com.project.model.ServiceType;
 
 public class AppointmentDTO {
-    public String patientId;
-    public String doctorId;
+
     public String serviceDate;
     public ServiceType serviceType;
     public float amount;
     public PaymentType paymentType;
     public boolean paymentStatus;
 
-    public String getPatientId() {
-        return patientId;
-    }
-    public void setPatientId(String patientId) {
-        this.patientId = patientId;
-    }
-    public String getDoctorId() {
-        return doctorId;
-    }
-    public void setDoctorId(String doctorId) {
-        this.doctorId = doctorId;
-    }
+
     public String getServiceDate() {
         return serviceDate;
     }
