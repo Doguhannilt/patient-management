@@ -1,5 +1,6 @@
 package com.project.controller;
 
+import com.project.dto.AppointmentResponseDTO;
 import org.springframework.web.bind.annotation.*;
 
 import com.project.dto.AppointmentDTO;
@@ -18,40 +19,42 @@ public class AppointmentController {
 
     private final AppointmentService appointmentService;
 
-    public AppointmentController(AppointmentService appointmentService) {
+    private final AppointmentResponseDTO appointmentResponseDTO;
+
+    public AppointmentController(AppointmentService appointmentService, AppointmentResponseDTO appointmentResponseDTO) {
         this.appointmentService = appointmentService;
+        this.appointmentResponseDTO = appointmentResponseDTO;
     }
 
     @PostMapping
     public ResponseEntity<AppointmentDTO> createAppointment(@RequestBody Appointment appointment) {
-        // Validation if patientId exists in patient-service - REST TEMPLATE
-        // Validation if doctorId exists in doctor-service - REST TEMPLATE
-        // if patientId and doctorId are valid, create the appointment
-        // else return error
-
-        return ResponseEntity.ok().body(new AppointmentDTO());
+        Appointment createdAppointment = appointmentService.createAppointment(appointment);
+        AppointmentDTO appointmentDTO = appointmentResponseDTO.toDTO(createdAppointment);
+        return ResponseEntity.ok(appointmentDTO);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<AppointmentDTO> updateAppointment(@RequestBody Appointment appointment) {
-
-        return ResponseEntity.ok().body(new AppointmentDTO());
+    public ResponseEntity<AppointmentDTO> updateAppointment(@PathVariable UUID id, @RequestBody Appointment appointment) {
+        appointment.setId(id);
+        Appointment updatedAppointment = appointmentService.updateAppointment(appointment).getBody();
+        AppointmentDTO appointmentDTO = appointmentResponseDTO.toDTO(updatedAppointment);
+        return ResponseEntity.ok(appointmentDTO);
     }
 
+
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteAppointment(@RequestBody UUID id) {
+    public ResponseEntity<Void> deleteAppointment(@PathVariable UUID id) {
         appointmentService.deleteAppointment(id);
         return ResponseEntity.noContent().build();
     }
 
+
     @GetMapping("/get")
     public ResponseEntity<List<Appointment>> getAllAppointments() {
         List<Appointment> appointments = appointmentService.getAllAppointments();
-
         if (appointments.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
-
         return ResponseEntity.ok(appointments);
     }
 
